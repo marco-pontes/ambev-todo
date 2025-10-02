@@ -1,0 +1,15 @@
+{
+  "app": {
+    "navbar": {
+      "home": "Início ES",
+      "create": "Criar Tarefa ES"
+    },
+    "header": "To-Dos App ES"
+  },
+  "home": {
+    "header": "Todo Lista ES"
+  },
+  "create": {
+    "header": "Criar ES"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "app": {
+    "navbar": {
+      "home": "Home",
+      "create": "Create Todo"
+    },
+    "header": "To-Dos App"
+  },
+  "home": {
+    "header": "Todos List"
+  },
+  "create": {
+    "header": "Create new todo!"
+  }
+}
