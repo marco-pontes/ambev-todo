@@ -1,7 +1,7 @@
 import type { FunctionComponent } from "@/types/types.ts";
 import { useTranslation } from "react-i18next";
 import { Box, Center, GridItem, Heading, SimpleGrid } from "@chakra-ui/react";
-import { NavBar } from "@/components/ui/navbar.tsx";
+import { NavBar } from "@/components/ui/navbar/navbar.tsx";
 
 export const PageHeader = (): FunctionComponent => {
 	const { t } = useTranslation("translations");
