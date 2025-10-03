@@ -6,7 +6,7 @@ import { FaCirclePause, FaFileSignature } from "react-icons/fa6";
 import { LuArchiveX, LuCheck } from "react-icons/lu";
 
 type TableMenuProps = { todo: Todo };
-export const TableMenu = ({ todo }: TableMenuProps): FunctionComponent => {
+export const TodosMenu = ({ todo }: TableMenuProps): FunctionComponent => {
 	const { handleEditTodo, mutateUpdate, mutateDelete, isPending } =
 		useApplicationContext();
 
@@ -25,6 +25,7 @@ export const TableMenu = ({ todo }: TableMenuProps): FunctionComponent => {
 		<HStack display={{ sm: "block", md: "flex" }}>
 			<IconButton
 				disabled={isPending}
+				id="edit-todo"
 				onClick={() => {
 					handleEditTodo(todo);
 				}}
@@ -35,6 +36,7 @@ export const TableMenu = ({ todo }: TableMenuProps): FunctionComponent => {
 				<IconButton
 					bg="green.focusRing"
 					disabled={isPending}
+					id="complete-todo"
 					onClick={() => {
 						handleCompleteTodo(todo.id);
 					}}
@@ -46,6 +48,7 @@ export const TableMenu = ({ todo }: TableMenuProps): FunctionComponent => {
 				<IconButton
 					bg="yellow.focusRing"
 					disabled={isPending}
+					id="pending-todo"
 					onClick={() => {
 						handlePendingTodo(todo.id);
 					}}
@@ -56,6 +59,7 @@ export const TableMenu = ({ todo }: TableMenuProps): FunctionComponent => {
 			<IconButton
 				bg="red.focusRing"
 				disabled={isPending}
+				id="delete-todo"
 				onClick={() => {
 					handleDeleteTodo(todo.id);
 				}}

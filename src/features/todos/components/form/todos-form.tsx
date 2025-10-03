@@ -1,4 +1,5 @@
 import type { FunctionComponent } from "@/types/types.ts";
+import { AlertType } from "@/types/types.ts";
 import {
 	Box,
 	Button,
@@ -11,16 +12,16 @@ import {
 	Stack,
 	Textarea,
 } from "@chakra-ui/react";
-import {
-	type UpdateTodoVariables,
-	TodoStatus,
-} from "@/features/todos/types/todo.ts";
-import { type TodoFormValues, todoSchema } from "../schemas/todoSchema";
+import { type Todo, TodoStatus } from "@/features/todos/types/todo.ts";
+import { type TodoFormValues, todoSchema } from "../../schemas/todoSchema.ts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { useApplicationContext } from "@/context/ApplicationContext.tsx";
 
-type TodosFormProperties = UpdateTodoVariables & {
-	onSubmitTodo: (todo: UpdateTodoVariables) => void;
+type TodosFormProperties = Partial<Todo> & {
+	onSubmitTodo: (todo: Partial<Todo>) => void;
 	submitDisabled: boolean;
 };
 
@@ -32,6 +33,9 @@ export const TodosForm = ({
 	onSubmitTodo,
 	submitDisabled,
 }: TodosFormProperties): FunctionComponent => {
+	const { t } = useTranslation();
+	const { addMessage } = useApplicationContext();
+
 	const {
 		register,
 		handleSubmit,
@@ -48,7 +52,16 @@ export const TodosForm = ({
 		},
 	});
 
-	const handleSubmitTodo = (data: TodoFormValues): void => {
+	useEffect(() => {
+		if (errors.title) {
+			addMessage({
+				type: AlertType.error,
+				message: t("todos.messages.errors"),
+			});
+		}
+	}, [addMessage, errors.title, t]);
+
+	const handleValid = (data: TodoFormValues): void => {
 		onSubmitTodo({ ...data });
 		if (!data.id) {
 			reset();
@@ -56,18 +69,16 @@ export const TodosForm = ({
 	};
 
 	return (
-		<Box as="form" onSubmit={handleSubmit(handleSubmitTodo)}>
+		<Box as="form" onSubmit={handleSubmit(handleValid)}>
 			<Fieldset.Root maxW="full">
 				<Stack>
-					<Fieldset.Legend>To-do details</Fieldset.Legend>
-					<Fieldset.HelperText>
-						Please provide the To-do details below.
-					</Fieldset.HelperText>
+					<Fieldset.Legend>{t("todos.form.title")}</Fieldset.Legend>
+					<Fieldset.HelperText>{t("todos.form.text")}</Fieldset.HelperText>
 				</Stack>
 
 				<Fieldset.Content>
 					<Field.Root required invalid={!!errors.title} mb={4}>
-						<Field.Label>Title</Field.Label>
+						<Field.Label>{t("todos.form.fields.labels.title")}</Field.Label>
 						<Input id="title" {...register("title")} />
 						<Field.ErrorText>
 							{errors.title && errors.title.message}
@@ -75,7 +86,9 @@ export const TodosForm = ({
 					</Field.Root>
 
 					<Field.Root invalid={!!errors.description}>
-						<Field.Label>Description</Field.Label>
+						<Field.Label>
+							{t("todos.form.fields.labels.description")}
+						</Field.Label>
 						<Textarea id="description" {...register("description")} />
 						<Field.ErrorText>
 							{errors.description && errors.description.message}
@@ -83,13 +96,13 @@ export const TodosForm = ({
 					</Field.Root>
 
 					<Field.Root required invalid={!!errors.status}>
-						<Field.Label>Status</Field.Label>
+						<Field.Label>{t("todos.form.fields.labels.status")}</Field.Label>
 						<NativeSelect.Root>
 							<NativeSelect.Field id="status" {...register("status")}>
 								<For each={[TodoStatus.PENDING, TodoStatus.COMPLETED]}>
 									{(item) => (
 										<option key={item} value={item}>
-											{item}
+											{t(`todos.enums.status.${item}`)}
 										</option>
 									)}
 								</For>
@@ -104,7 +117,7 @@ export const TodosForm = ({
 			</Fieldset.Root>
 			<Center p={10}>
 				<Button loading={isSubmitting || submitDisabled} type={"submit"}>
-					Salvar
+					{t("todos.form.save.button")}
 				</Button>
 			</Center>
 		</Box>

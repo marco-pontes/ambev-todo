@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { NavBar } from "./navbar";
+import { NavBar } from "./navbar.tsx";
 import { render } from "@/test-utils/render.tsx";
 
 describe("Navbar Component", () => {

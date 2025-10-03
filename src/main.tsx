@@ -4,8 +4,13 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { routeTree } from "./routeTree.gen.ts";
 import "./common/i18n";
+import { LoadingSkeleton } from "@/components/layout/loading-skeleton/loading-skeleton.tsx";
 
-const router = createRouter({ routeTree });
+const router = createRouter({
+	routeTree,
+	defaultPendingComponent: () => <LoadingSkeleton />,
+	defaultPendingMs: 0,
+});
 
 export type TanstackRouter = typeof router;
 
@@ -21,9 +26,7 @@ if (!rootElement.innerHTML) {
 	const root = ReactDOM.createRoot(rootElement);
 	root.render(
 		<React.StrictMode>
-			<React.Suspense fallback="loading">
-				<App router={router} />
-			</React.Suspense>
+			<App router={router} />
 		</React.StrictMode>
 	);
 }

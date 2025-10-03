@@ -1,31 +1,23 @@
-import type { ReactNode } from "react";
-import type { FunctionComponent } from "../../types/types.ts";
-import {
-	Box,
-	Center,
-	ClientOnly,
-	Container,
-	Skeleton,
-	Text,
-} from "@chakra-ui/react";
-import { ColorModeButton } from "@/components/ui/color-mode.tsx";
+import type {
+	FunctionComponent,
+	MainLayoutProps,
+} from "../../../types/types.ts";
+import { Box, Center, ClientOnly, Container, Skeleton } from "@chakra-ui/react";
+import { ColorModeButton } from "@/components/ui/color-mode/color-mode.tsx";
 import { useApplicationContext } from "@/context/ApplicationContext.tsx";
-import { PageHeader } from "@/components/ui/page-header.tsx";
-
-type MainLayoutProps = {
-	children: ReactNode;
-};
+import { PageHeader } from "@/components/ui/page-header/page-header.tsx";
+import { Alert } from "@/components/ui/alert/alert.tsx";
 
 export const MainLayout = ({
 	children,
 }: MainLayoutProps): FunctionComponent => {
-	const { hasError, errorMessage } = useApplicationContext();
+	const { message } = useApplicationContext();
 	return (
 		<Container>
 			<PageHeader />
-			{hasError && (
+			{message && (
 				<Center padding="4" width="100%">
-					<Text color="red.500">Error loading: {errorMessage}</Text>
+					<Alert message={message.message} type={message.type} />
 				</Center>
 			)}
 			{children}

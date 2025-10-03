@@ -9,14 +9,14 @@ export const PageHeader = (): FunctionComponent => {
 		<>
 			<SimpleGrid columns={{ base: 12, md: 12 }}>
 				<GridItem colSpan={{ base: 12, md: 12 }}>
-					<Center bg="bg.subtle" h="100px">
+					<Center bg="bg.subtle" h="24">
 						<Heading letterSpacing="tight" size="2xl">
 							{t("app.header")}
 						</Heading>
 					</Center>
 				</GridItem>
 			</SimpleGrid>
-			<Box bg="bg.emphasized" height="80px" position="relative" width="full">
+			<Box bg="bg.emphasized" height="20" position="relative" width="full">
 				<SimpleGrid columns={{ base: 12, md: 12 }}>
 					<GridItem colSpan={{ base: 12, md: 12 }}>
 						<NavBar></NavBar>

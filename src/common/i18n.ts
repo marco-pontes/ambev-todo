@@ -2,21 +2,17 @@ import i18n, { type InitOptions } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import Backend, { type HttpBackendOptions } from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
-import translationEN from "../assets/locales/en/translations.json";
-import translationES from "../assets/locales/es/translations.json";
-import translationPtBr from "@/assets/locales/pt-BR/translations.json";
 import { isProduction } from "./utils/utilities.ts";
+import { loadTranslations } from "@/common/i18n-loader.ts";
 
 export const defaultNS = "translations";
-export const resources = {
-	en: { translations: translationEN },
-	es: { translations: translationES },
-	ptBr: { translations: translationPtBr },
-} as const;
+
+export const resources = loadTranslations();
 
 const i18nOptions: InitOptions<HttpBackendOptions> = {
 	lng: "pt-BR",
 	defaultNS,
+	resources,
 	ns: [defaultNS],
 	debug: !isProduction,
 	fallbackLng: "en",
@@ -25,8 +21,8 @@ const i18nOptions: InitOptions<HttpBackendOptions> = {
 	},
 	backend: {
 		loadPath: isProduction
-			? "locales/{{lng}}/translations.json"
-			: "src/assets/locales/{{lng}}/translations.json",
+			? "locales/{{lng}}.json"
+			: "src/assets/locales/{{lng}}.json",
 	},
 };
 

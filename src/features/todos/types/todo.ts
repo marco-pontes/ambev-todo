@@ -10,13 +10,6 @@ export type Todo = {
 	status: TodoStatus;
 };
 
-export type UpdateTodoVariables = {
-	id?: number;
-	status?: TodoStatus;
-	title?: string;
-	description?: string;
-};
-
 export type FetchResponse = {
 	totalResults: number;
 	todos: Array<Todo>;

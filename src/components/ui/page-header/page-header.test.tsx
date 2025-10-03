@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { PageHeader } from "./page-header";
+import { PageHeader } from "./page-header.tsx";
 import { render } from "@/test-utils/render.tsx";
 
 describe("PageHeader Component", () => {

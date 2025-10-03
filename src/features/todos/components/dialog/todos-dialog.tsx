@@ -1,8 +1,9 @@
 import type { FunctionComponent } from "@/types/types.ts";
 import { useApplicationContext } from "@/context/ApplicationContext.tsx";
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
-import { TodosForm } from "@/features/todos/components/todos-form.tsx";
-import type { UpdateTodoVariables } from "@/features/todos/types/todo.ts";
+import { TodosForm } from "@/features/todos/components/form/todos-form.tsx";
+import type { Todo } from "@/features/todos/types/todo.ts";
+import { useTranslation } from "react-i18next";
 
 export const TodosDialog = (): FunctionComponent => {
 	const {
@@ -12,8 +13,9 @@ export const TodosDialog = (): FunctionComponent => {
 		setEditModalOpen,
 		isPending,
 	} = useApplicationContext();
+	const { t } = useTranslation();
 
-	const handleSubmitTodo = (todo: UpdateTodoVariables): void => {
+	const handleSubmitTodo = (todo: Partial<Todo>): void => {
 		setEditModalOpen(false);
 		handleUpdateTodo(todo);
 	};
@@ -31,7 +33,7 @@ export const TodosDialog = (): FunctionComponent => {
 				<Dialog.Positioner>
 					<Dialog.Content>
 						<Dialog.Header>
-							<Dialog.Title>Edit To-Do</Dialog.Title>
+							<Dialog.Title>{t("todos.edit.dialog.title")}</Dialog.Title>
 						</Dialog.Header>
 						<Dialog.Body>
 							<TodosForm

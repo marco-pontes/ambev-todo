@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "../types/types.ts";
-import { MainLayout } from "../components/layout/MainLayout.tsx";
+import { MainLayout } from "@/components/layout/main-layout";
 import { useTranslation } from "react-i18next";
 import {
 	Box,
@@ -9,15 +9,15 @@ import {
 	SimpleGrid,
 	VStack,
 } from "@chakra-ui/react";
-import { TodosForm } from "@/features/todos/components/todos-form.tsx";
-import type { UpdateTodoVariables } from "@/features/todos/types/todo.ts";
+import { TodosForm } from "@/features/todos/components/form/todos-form.tsx";
+import type { Todo } from "@/features/todos/types/todo.ts";
 import { useApplicationContext } from "@/context/ApplicationContext.tsx";
 
 export const Create = (): FunctionComponent => {
 	const { t } = useTranslation("translations");
 	const { mutateCreate, isPendingCreate } = useApplicationContext();
 
-	const handleSubmitTodo = (todo: UpdateTodoVariables): void => {
+	const handleSubmitTodo = (todo: Partial<Todo>): void => {
 		mutateCreate(todo);
 	};
 

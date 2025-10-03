@@ -1,25 +1,23 @@
 import i18n, { type InitOptions } from "i18next";
 import Backend, { type HttpBackendOptions } from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
-import translationPtBr from "@/assets/locales/pt-BR/translations.json";
+import { loadTranslations } from "@/common/i18n-loader.ts";
 
 export const defaultNS = "translations";
-export const resources = {
-	"pt-BR": { translations: translationPtBr },
-} as const;
+export const resources = loadTranslations();
 
 const i18nOptions: InitOptions<HttpBackendOptions> = {
 	lng: "pt-BR",
 	defaultNS,
 	ns: [defaultNS],
 	resources,
-	debug: true,
+	debug: false,
 	fallbackLng: "en",
 	interpolation: {
 		escapeValue: false, // not needed for react as it escapes by default
 	},
 	backend: {
-		loadPath: "src/assets/locales/{{lng}}/translations.json",
+		loadPath: "src/assets/locales/pt-BR.json",
 	},
 };
 

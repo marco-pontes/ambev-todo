@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { render } from "@/test-utils/render.tsx";
 import userEvent from "@testing-library/user-event";
-import { ColorModeButton, ColorModeIcon } from "./color-mode";
+import { ColorModeButton, ColorModeIcon } from "./color-mode.tsx";
 
 describe("Color Mode UI", () => {
 	it("renders ColorModeIcon (SVG present)", () => {

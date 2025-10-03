@@ -7,7 +7,7 @@ import type { TanstackRouter } from "./main";
 import { TanStackRouterDevelopmentTools } from "./components/utils/development-tools/TanStackRouterDevelopmentTools";
 import { ApplicationProvider } from "./context/ApplicationContext";
 import { theme } from "@/components/ui/theme.ts";
-import { ColorModeProvider } from "@/components/ui/color-mode.tsx";
+import { ColorModeProvider } from "@/components/ui/color-mode/color-mode.tsx";
 
 const queryClient = new QueryClient();
 
