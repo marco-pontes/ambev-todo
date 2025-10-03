@@ -24,7 +24,9 @@ export const TodosMenu = ({ todo }: TableMenuProps): FunctionComponent => {
 	return (
 		<HStack display={{ sm: "block", md: "flex" }}>
 			<IconButton
+				id="edit-todo"
 				className="edit-todo"
+				aria-label="Edit todo"
 				disabled={isPending}
 				onClick={() => {
 					handleEditTodo(todo);
@@ -34,8 +36,10 @@ export const TodosMenu = ({ todo }: TableMenuProps): FunctionComponent => {
 			</IconButton>
 			{todo.status === TodoStatus.PENDING && (
 				<IconButton
+					aria-label="Complete todo"
 					bg="green.focusRing"
 					className="complete-todo"
+					id="complete-todo"
 					disabled={isPending}
 					onClick={() => {
 						handleCompleteTodo(todo.id);
@@ -46,8 +50,10 @@ export const TodosMenu = ({ todo }: TableMenuProps): FunctionComponent => {
 			)}
 			{todo.status === TodoStatus.COMPLETED && (
 				<IconButton
+					aria-label="Set todo pending"
 					bg="yellow.focusRing"
 					className="pending-todo"
+					id="pending-todo"
 					disabled={isPending}
 					onClick={() => {
 						handlePendingTodo(todo.id);
@@ -57,8 +63,10 @@ export const TodosMenu = ({ todo }: TableMenuProps): FunctionComponent => {
 				</IconButton>
 			)}
 			<IconButton
+				aria-label="Delete todo"
 				bg="red.focusRing"
 				className="delete-todo"
+				id="delete-todo"
 				disabled={isPending}
 				onClick={() => {
 					handleDeleteTodo(todo.id);
