@@ -1,5 +1,5 @@
 import { createServer, Response } from "miragejs";
-import { Todo, TodoStatus } from "@/features/todos/types/todo.ts";
+import { Todo, TodoStatus } from "../src/features/todos/types/todo";
 
 function seedTodos(): Todo[] {
 	const items: Todo[] = [];

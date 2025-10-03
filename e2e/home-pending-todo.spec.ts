@@ -9,7 +9,7 @@ async function waitForTodosToLoad(page: Page): Promise<void> {
 }
 
 async function ensureAndClickPending(page: Page): Promise<void> {
-	const pendingButton = page.locator("#pending-todo").first();
+	const pendingButton = page.locator(".pending-todo").first();
 	if (await pendingButton.count()) {
 		await expect(pendingButton).toBeVisible();
 		await pendingButton.click();

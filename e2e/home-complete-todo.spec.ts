@@ -9,7 +9,7 @@ async function waitForTodosToLoad(page: Page): Promise<void> {
 }
 
 async function ensureAndClickComplete(page: Page): Promise<void> {
-	const completeButton = page.locator("#complete-todo").first();
+	const completeButton = page.locator(".complete-todo").first();
 	if (await completeButton.count()) {
 		await expect(completeButton).toBeVisible();
 		await completeButton.click();
@@ -29,8 +29,9 @@ test("home loads, table appears, completing a todo shows success message", async
 	page,
 }) => {
 	await waitForTodosToLoad(page);
-
+	await page.screenshot();
 	await ensureAndClickComplete(page);
+	await page.screenshot();
 
 	await expect(page.getByText(/sucesso ao atualizar tarefa!/i)).toBeVisible({
 		timeout: 5000,
