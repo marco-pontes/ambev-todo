@@ -23,7 +23,8 @@ Special note about the API
 - MirageJS is also available in scripts/server.ts. To enable MirageJS instead of the simple-fake-api server, edit src/main.tsx and uncomment the lines:
   //import { makeServer } from "../scripts/server.ts";
   //makeServer();
-  Then restart the app. By default, npm run start launches simple-fake-api alongside Vite.
+- On the package.json file, remove 'simple-fake-api' from the "start" command,
+  then restart the app. By default, npm run start launches simple-fake-api alongside Vite.
 
 
 ## Table of Contents
