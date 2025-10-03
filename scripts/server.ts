@@ -34,8 +34,8 @@ function seedTodos(): Todo[] {
 
 let todos: Todo[] = seedTodos();
 
-export function makeServer({ environment = "development" } = {}) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+type MakeServerOptions = { environment?: string };
+export function makeServer({ environment = "development" }: MakeServerOptions = {}) {
   const server = createServer({
     environment,
 
@@ -44,7 +44,7 @@ export function makeServer({ environment = "development" } = {}) {
       this.namespace = "/v1";
 
       // GET /v1/todos with pagination
-      this.get("/todos", (schema, request) => {
+      this.get("/todos", (_schema, request) => {
         const page = parseInt((request.queryParams.page as string) || "1", 10);
         const limit = parseInt((request.queryParams.limit as string) || "10", 10);
         const startIndex = (page - 1) * limit;
@@ -60,7 +60,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       // POST /v1/todos create
-      this.post("/todos", (schema, request) => {
+      this.post("/todos", (_schema, request) => {
         try {
           const body = JSON.parse(request.requestBody || "{}");
           const { status, title, description } = body as Partial<Todo>;
@@ -91,7 +91,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       // PATCH /v1/todos/:id update
-      this.patch("/todos/:id", (schema, request) => {
+      this.patch("/todos/:id", (_schema, request) => {
         const id = parseInt(request.params.id, 10);
         try {
           const body = JSON.parse(request.requestBody || "{}");
@@ -123,12 +123,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       // DELETE /v1/todos/:id
-      this.del("/todos/:id", () => {
-        // Note: mirage uses `del` method for DELETE
-        return undefined as unknown as Response;
-      });
-
-      this.delete("/todos/:id", (schema, request) => {
+      this.delete("/todos/:id", (_schema, request) => {
         const id = parseInt(request.params.id, 10);
         const idx = todos.findIndex((t) => t.id === id);
         if (idx > -1) {
