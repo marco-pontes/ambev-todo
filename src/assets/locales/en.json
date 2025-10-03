@@ -2,14 +2,14 @@
   "app": {
     "navbar": {
       "home": "Home",
-      "create": "Create Todo"
+      "create": "Create Task"
     },
-    "header": "To-Dos App"
+    "header": "Task Manager"
   },
   "home": {
-    "header": "Todos List"
+    "header": "Task List"
   },
   "create": {
-    "header": "Create new todo!"
+    "header": "Create new task"
   }
 }
